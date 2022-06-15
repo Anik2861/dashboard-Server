@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors');
 const app = express()
 require('dotenv').config()
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const { restart } = require('nodemon');
 const port = process.env.PORT || 5000
 
@@ -29,12 +29,12 @@ async function run() {
         })
 
         // delete api
-        app.delete('/booking/:id', async (req, res) => {
+        app.delete('/api/:id', async (req, res) => {
             const id = req.params.id
             console.log(id)
             const query = { _id: ObjectId(id) }
             console.log(query)
-            const result = await BookingCollection.deleteOne(query)
+            const result = await dashboardCollection.deleteOne(query)
             res.send(result)
         })
     }
